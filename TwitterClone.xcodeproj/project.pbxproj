@@ -15,6 +15,10 @@
 		C8EE93ED25670D25004E7B41 /* TwitterCloneTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8EE93EC25670D25004E7B41 /* TwitterCloneTests.swift */; };
 		C8EE93F825670D25004E7B41 /* TwitterCloneUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8EE93F725670D25004E7B41 /* TwitterCloneUITests.swift */; };
 		C8EE941525670FFA004E7B41 /* MainTabController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8EE941425670FFA004E7B41 /* MainTabController.swift */; };
+		C8EE941A25671181004E7B41 /* FeedController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8EE941925671181004E7B41 /* FeedController.swift */; };
+		C8EE941F25671271004E7B41 /* ExploreController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8EE941E25671271004E7B41 /* ExploreController.swift */; };
+		C8EE94242567128B004E7B41 /* NotificationsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8EE94232567128B004E7B41 /* NotificationsController.swift */; };
+		C8EE9429256712AD004E7B41 /* ConversationsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8EE9428256712AD004E7B41 /* ConversationsController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -49,6 +53,10 @@
 		C8EE93F725670D25004E7B41 /* TwitterCloneUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TwitterCloneUITests.swift; sourceTree = "<group>"; };
 		C8EE93F925670D25004E7B41 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		C8EE941425670FFA004E7B41 /* MainTabController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabController.swift; sourceTree = "<group>"; };
+		C8EE941925671181004E7B41 /* FeedController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedController.swift; sourceTree = "<group>"; };
+		C8EE941E25671271004E7B41 /* ExploreController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExploreController.swift; sourceTree = "<group>"; };
+		C8EE94232567128B004E7B41 /* NotificationsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationsController.swift; sourceTree = "<group>"; };
+		C8EE9428256712AD004E7B41 /* ConversationsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConversationsController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -151,6 +159,10 @@
 			isa = PBXGroup;
 			children = (
 				C8EE941425670FFA004E7B41 /* MainTabController.swift */,
+				C8EE941925671181004E7B41 /* FeedController.swift */,
+				C8EE941E25671271004E7B41 /* ExploreController.swift */,
+				C8EE94232567128B004E7B41 /* NotificationsController.swift */,
+				C8EE9428256712AD004E7B41 /* ConversationsController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -306,9 +318,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C8EE94242567128B004E7B41 /* NotificationsController.swift in Sources */,
+				C8EE9429256712AD004E7B41 /* ConversationsController.swift in Sources */,
 				C8EE93D625670D24004E7B41 /* AppDelegate.swift in Sources */,
+				C8EE941F25671271004E7B41 /* ExploreController.swift in Sources */,
 				C8EE93D825670D24004E7B41 /* SceneDelegate.swift in Sources */,
 				C8EE941525670FFA004E7B41 /* MainTabController.swift in Sources */,
+				C8EE941A25671181004E7B41 /* FeedController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

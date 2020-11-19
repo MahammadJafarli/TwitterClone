@@ -11,21 +11,23 @@ class MainTabController: UITabBarController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
-        
         view.backgroundColor = .systemPink
+        configureViewController()
     }
     
+    func configureViewController() {
+        let feed = FeedConteoller()
+        feed.tabBarItem.image = UIImage(named: "home_unselected")
+        let explore = ExploreController()
+        explore.tabBarItem.image = UIImage(named: "search_unselected")
+        let notifications = NotificationsController()
+        notifications.tabBarItem.image = UIImage(named: "like_unselected")
+        let conversations = ConversationsController()
+        conversations.tabBarItem.image = UIImage(named: "mail")
 
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+        
+        viewControllers = [feed, explore, notifications, conversations]
     }
-    */
 
 }
+ 
