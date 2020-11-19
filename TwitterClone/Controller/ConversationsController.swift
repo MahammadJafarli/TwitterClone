@@ -8,11 +8,15 @@
 import UIKit
 
 class ConversationsController: UIViewController {
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .gray
+        configureUI()
     }
-
-
+    
+    func configureUI() {
+        view.backgroundColor = .white
+        navigationItem.title = "Messages"
+    }
+    
 }
