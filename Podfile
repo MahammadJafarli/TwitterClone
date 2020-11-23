@@ -11,7 +11,7 @@ target 'TwitterClone' do
   pod 'Firebase/Database'
   pod 'Firebase/Storage'
   pod 'Firebase/Auth'
-
+  pod 'SDWebImage', '~> 5.0'
 
   target 'TwitterCloneTests' do
     inherit! :search_paths
