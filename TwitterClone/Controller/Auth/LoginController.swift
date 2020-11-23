@@ -61,7 +61,22 @@ class LoginController: UIViewController {
     }
     
     @objc func handleLogin() {
-        print("success")
+        guard let email = emailTextField.text else { return }
+        guard let password = passwordTextField.text else { return }
+        if email != "" && password != "" {
+            AuthService.shared.logUserIn(withEmail: email, password: password) { (result, error) in
+                if let error = error {
+                    self.makeAlert(titleInput: "Error", messageInput: error.localizedDescription)
+                    return
+                }
+                guard let window = UIApplication.shared.windows.first(where: { $0.isKeyWindow }) else { return }
+                guard let tab = window.rootViewController as? MainTabController else { return }
+                tab.authenicateUserAndConfigureUI()
+                self.dismiss(animated: true, completion: nil)
+            }
+        }else{
+            makeAlert(titleInput: "Error", messageInput: "Username / Password")
+        }
     }
     
     @objc func handleShowSignUp() {
@@ -88,5 +103,11 @@ class LoginController: UIViewController {
         
         view.addSubview(dontHaveAccoutButton)
         dontHaveAccoutButton.anchor(left: view.leftAnchor, bottom: view.safeAreaLayoutGuide.bottomAnchor, right: view.rightAnchor, paddingLeft: 40, paddingRight: 40)
+    }
+    func makeAlert(titleInput: String, messageInput: String) {
+        let alert = UIAlertController(title: titleInput, message: messageInput, preferredStyle: UIAlertController.Style.alert)
+        let okButton = UIAlertAction(title: "Ok", style: UIAlertAction.Style.cancel, handler: nil)
+        alert.addAction(okButton)
+        self.present(alert, animated: true, completion: nil)
     }
 }

@@ -6,10 +6,13 @@
 //
 
 import UIKit
+import Firebase
 
 class RegisterController: UIViewController {
     
     private let imagePicker = UIImagePickerController()
+    
+    private var profileImage : UIImage?
     
     private let photoImageView : UIButton = {
         let button = UIButton(type: .system)
@@ -84,7 +87,26 @@ class RegisterController: UIViewController {
     }
     
     @objc func handleSigup() {
+        guard let profileImage = profileImage else {
+            makeAlert(titleInput: "Error", messageInput: "DEBUG: Please select a profile Image")
+            return
+        }
+        guard let email = emailTextField.text else { return }
+        guard let password = passwordTextField.text else { return }
+        guard let userName = userNameTextField.text else { return }
+        guard let fullName = fullNameTextField.text else { return }
         
+        if email != "" && password != "" && userName != "" && fullName != "" {
+            let credentials = AuthCredentials(email: email, password: password, userName: userName, fullName: fullName, profileImage: profileImage)
+            AuthService.shared.registerUser(credentials: credentials) { (error, ref) in
+                guard let window = UIApplication.shared.windows.first(where: { $0.isKeyWindow }) else { return }
+                guard let tab = window.rootViewController as? MainTabController else { return }
+                tab.authenicateUserAndConfigureUI()
+                self.dismiss(animated: true, completion: nil)
+            }
+        } else{
+            makeAlert(titleInput: "Error", messageInput: "DEBUG: Please enter all values")
+        }
     }
     
     @objc func handleProfilePhoto() {
@@ -116,12 +138,21 @@ class RegisterController: UIViewController {
         view.addSubview(alreadyHaveAccoutButton)
         alreadyHaveAccoutButton.anchor(left: view.leftAnchor, bottom: view.safeAreaLayoutGuide.bottomAnchor, right: view.rightAnchor, paddingLeft: 40, paddingRight: 40)
     }
+    func makeAlert(titleInput: String, messageInput: String) {
+        let alert = UIAlertController(title: titleInput, message: messageInput, preferredStyle: UIAlertController.Style.alert)
+        let okButton = UIAlertAction(title: "Ok", style: UIAlertAction.Style.cancel, handler: nil)
+        alert.addAction(okButton)
+        self.present(alert, animated: true, completion: nil)
+    }
 }
 
 extension RegisterController : UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         guard let profileImage = info[.editedImage] as? UIImage else { return }
+        
+        self.profileImage = profileImage
+        
         self .photoImageView.setImage(profileImage.withRenderingMode(.alwaysOriginal), for: .normal)
         photoImageView.layer.cornerRadius = 125 / 2
         photoImageView.layer.masksToBounds = true
