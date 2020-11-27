@@ -13,7 +13,7 @@ class MainTabController: UITabBarController {
     var user : User? {
         didSet{
             guard let nav = viewControllers?[0] as? UINavigationController else { return }
-            guard let feed = nav.viewControllers.first as? FeedConteoller else { return }
+            guard let feed = nav.viewControllers.first as? FeedController else { return }
             feed.user = user
         }
     }
@@ -36,7 +36,8 @@ class MainTabController: UITabBarController {
     }
     
     func fetchUser() {
-        UserService.shared.fetchUser { (user) in
+        guard let uid = Auth.auth().currentUser?.uid else { return }
+        UserService.shared.fetchUser(uid: uid) { (user) in
             self.user = user 
         }
     }
@@ -78,7 +79,7 @@ class MainTabController: UITabBarController {
     }
     
     func configureViewController() {
-        let feed = FeedConteoller()
+        let feed = FeedController(collectionViewLayout: UICollectionViewFlowLayout())
         let nav1 = templateNavigationController(image: UIImage(named: "home_unselected"), rootViewController: feed)
         
         let explore = ExploreController()

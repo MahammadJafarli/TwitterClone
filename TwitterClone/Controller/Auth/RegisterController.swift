@@ -93,7 +93,7 @@ class RegisterController: UIViewController {
         }
         guard let email = emailTextField.text else { return }
         guard let password = passwordTextField.text else { return }
-        guard let userName = userNameTextField.text else { return }
+        guard let userName = userNameTextField.text?.lowercased() else { return }
         guard let fullName = fullNameTextField.text else { return }
         
         if email != "" && password != "" && userName != "" && fullName != "" {
