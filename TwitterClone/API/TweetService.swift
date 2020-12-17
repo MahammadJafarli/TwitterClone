@@ -16,7 +16,11 @@ struct TweetService {
                       "like" : 0,
                       "retweets" : 0,
                       "caption" : caption] as [String : Any]
-        REF_TWEETS.childByAutoId().updateChildValues(values, withCompletionBlock: completion)
+        let ref = REF_TWEETS.childByAutoId()
+        ref.updateChildValues(values){ (err, ref) in
+            guard let tweetId = ref.key else { return }
+            REF_USER_TWEETS.child(uid).updateChildValues([tweetId: 1], withCompletionBlock: completion)
+        }
     }
     
     func fetchTweets(completion: @escaping([Tweet]) -> Void ) {
@@ -29,6 +33,22 @@ struct TweetService {
                 let tweet = Tweet(user: user, tweetId: tweetId, dictionary: dictionary)
                 tweets.append(tweet)
                 completion(tweets)
+            }
+        }
+    }
+    
+    func fetchTweets(forUser user: User, completion: @escaping([Tweet]) -> Void) {
+        var tweets = [Tweet]()
+        REF_USER_TWEETS.child(user.uid).observe(.childAdded) { snapshot in
+            let tweetId = snapshot.key
+            REF_TWEETS.child(tweetId).observeSingleEvent(of: .value) { snapshot in
+                guard let dictionary =  snapshot.value as? [String: Any]  else { return }
+                guard let uid = dictionary["uid"] as? String else { return }
+                UserService.shared.fetchUser(uid: uid) { (user) in
+                    let tweet = Tweet(user: user, tweetId: tweetId, dictionary: dictionary)
+                    tweets.append(tweet)
+                    completion(tweets)
+                }
             }
         }
     }
