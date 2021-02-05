@@ -103,7 +103,7 @@ extension ProfileController: UICollectionViewDelegateFlowLayout {
 extension ProfileController: ProfileHeaderDelegate {
     func handleEditProfileFollow(_ header: ProfileHeader) {
         
-        if user.currentUser {
+        if user.isCurrentUser {
             print("edit profile")
             return
         }
